@@ -1,4 +1,4 @@
-const pool=require("../../config/pool")
+    const pool=require("../../config/pool")
 
 
 const FindAll=()=>{
@@ -15,7 +15,7 @@ const FindAll=()=>{
 
 const FindAllReflectionsUser=(id)=>{
     return new Promise((resolve,reject)=>{
-        pool.query("SELECT * FROM reflections INNER JOIN users ON reflections.owner_id=users.id WHERE owner_id=$1",[id])
+        pool.query("SELECT reflections.id,reflections.success,reflections.low_point,reflections.take_away,reflections.owner_id,reflections.created_date,reflections.modified_date,users.username,users.email FROM reflections INNER JOIN users ON reflections.owner_id=users.id WHERE owner_id=$1",[id])
             .then((result)=>{
                 resolve(result)
             })

@@ -33,7 +33,7 @@ Content-Type: application/json
 
 {
   "success":"today success",
-  "low_point":"new low point 3",
-  "take_away":"new Take Away 3"
+  "low_point":"new low point 5",
+  "take_away":"new Take Away 5"
 }
 
