@@ -1,1 +1,39 @@
-GET http://localhost:8000
+
+###
+GET {{host}}/users/all
+Authorization: Bearer {{accessToken}}
+
+###
+POST {{host}}/users/register
+Content-Type: application/json
+
+{
+  "email": "diory2@gmail.com",
+  "username": "pribadi",
+  "password": "12345"
+}
+
+###
+POST {{host}}/users/login
+Content-Type: application/json
+
+{
+  "username": "pribadi",
+  "password": "12345"
+}
+
+###
+GET {{host}}/reflections
+Authorization: Bearer {{accessToken}}
+
+###
+POST {{host}}/reflections
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "success":"today success",
+  "low_point":"new low point 3",
+  "take_away":"new Take Away 3"
+}
+

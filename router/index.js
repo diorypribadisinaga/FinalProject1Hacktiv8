@@ -1,12 +1,14 @@
 const router=require("express").Router();
 const {userRoute,reflectionRoute}=require("./partials")
-const controllrer=require("../app/controller")
+const controller = require("../app/controller");
+const { authentication } = require("../app/middleware")
 
-router.use(userRoute)
-router.use(reflectionRoute)
+router.use("/api/v1/users",userRoute)
+router.use(authentication)
+router.use("/api/v1/reflections",reflectionRoute)
 
-router.use(controllrer.api.main.onLost)
-router.use(controllrer.api.main.onError)
+router.use(controller.api.main.onLost)
+router.use(controller.api.main.onError)
 
 
 module.exports=router;
