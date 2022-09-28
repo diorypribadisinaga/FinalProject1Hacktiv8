@@ -2,7 +2,7 @@ const pool = require("../../config/pool")
 
 const query = `
 CREATE TABLE users (
-    id INT  NOT NULL PRIMARY KEY,
+    id serial primary key,
     email VARCHAR NOT NULL,
     username VARCHAR NOT NULL,
     password VARCHAR NOT NULL
@@ -10,14 +10,16 @@ CREATE TABLE users (
 `
 const query1 = `
 CREATE TABLE reflections (
-    id INT  NOT NULL PRIMARY KEY,
+    id serial primary key,
     success VARCHAR NOT NULL,
     low_point  VARCHAR NOT NULL,
     take_away VARCHAR NOT NULL,
     owner_id INT NOT NULL,
-    created_date VARCHAR NOT NULL,
-    modified_date VARCHAR NOT NULL,
-    FOREIGN KEY (owner_id) REFERENCES users(id)
+    created_date timestamp,
+    modified_date timestamp,
+    CONSTRAINT fk_users
+        FOREIGN KEY(owner_id)
+        REFERENCES users(id)
 );
 `
 pool.query(query, (err, res) => {

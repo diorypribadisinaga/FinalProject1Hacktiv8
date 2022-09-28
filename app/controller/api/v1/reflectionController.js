@@ -15,7 +15,7 @@ const createReflection=async (req,res)=>{
         const owner_id=req.user.id
         const { rowCount, rows } = await Reflection.FindAll()
         const id = rowCount === 0 ? 1 : (rows[rows.length - 1].id + 1)
-        console.log(rows,rowCount)
+        // console.log(rows,rowCount)
         const {success,low_point,take_away}=req.body
         const created_date=new Date().toLocaleString("id-ID")
         const result=await Reflection.CreateReflection(id,success,low_point,take_away,owner_id,created_date,created_date)

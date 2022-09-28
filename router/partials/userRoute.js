@@ -1,10 +1,9 @@
 const userRoute = require("express").Router();
-const controller = require("../../app/controller")
-const { authentication } = require("../../app/middleware")
+const UserController = require("./../../app/controller");
+const { authentication } = require("../../app/middleware");
 
-userRoute.get("/all", authentication,controller.api.v1.userController.GetUsers)
-userRoute.post("/register", controller.api.v1.userController.registerUser)
-userRoute.post("/login", controller.api.v1.userController.loginUser)
+userRoute.post("/register", UserController.api.v1.userController.register);
+userRoute.post("/login", UserController.api.v1.userController.login);
 
 
 
