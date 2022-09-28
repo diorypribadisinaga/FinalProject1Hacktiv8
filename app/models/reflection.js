@@ -26,18 +26,52 @@ const FindAllReflectionsUser=(id)=>{
 }
 
 const CreateReflection=(id,success,low_point,take_away,owner_id,created_date,modified_date)=>{
+    let now = new Date();
     const query="INSERT INTO reflections (id,success,low_point,take_away,owner_id,created_date,modified_date) values ($1,$2,$3,$4,$5,$6,$7) returning * "
     return new Promise((resolve,reject)=>{
-        pool.query(query,[id,success,low_point,take_away,owner_id,created_date,modified_date])
+        pool.query(query,[id,success,low_point,take_away,owner_id,now,now])
             .then((result)=>{
                 resolve(result)
             }).catch((err)=>{
                 reject(err)
-        })
+            })
+    })
+}
+
+const update = (success, low_point, take_away, id) => {
+    let now = new Date();
+    const query=`UPDATE reflections 
+    SET success=$1, low_point=$2, take_away=$3, modified_date=$4 WHERE id=$5
+    RETURNING id, success, low_point, take_away, owner_id, created_date, modified_date;`
+    return new Promise((resolve,reject)=>{
+        pool.query(query,[success, low_point, take_away, now, id])
+            .then((result)=>{
+                resolve(result)
+            }).catch((err)=>{
+                reject(err)
+            })
+    })
+}
+
+const del = (id) => {
+    const query=`DELETE FROM reflections
+    WHERE id = $1
+    RETURNING id, success, low_point, take_away, owner_id, created_date, modified_date;`
+    return new Promise((resolve,reject)=>{
+        pool.query(query,[id])
+            .then((result)=>{
+                resolve(result)
+            }).catch((err)=>{
+                reject(err)
+            })
     })
 }
 
 
 module.exports={
-    CreateReflection,FindAllReflectionsUser,FindAll
+    CreateReflection,
+    FindAllReflectionsUser,
+    FindAll,
+    update,
+    del
 }

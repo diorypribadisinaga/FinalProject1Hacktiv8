@@ -25,6 +25,31 @@ const createReflection=async (req,res)=>{
     }
 }
 
+const update = async (req, res) => {
+    try {
+        const { success, low_point, take_away } = req.body;
+        const { id } = req.params;
+        const result= await Reflection.update(success, low_point, take_away, id)
+        res.status(201).json(result.rows)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+    
+}
+
+const del = async (req, res) => {
+    try {
+        const { id } = req.params
+        const result=await Reflection.del(id)
+        res.status(201).json(result.rows)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
 module.exports={
-    findAllReflectionsUser,createReflection
+    findAllReflectionsUser,
+    createReflection,
+    update,
+    del
 }
