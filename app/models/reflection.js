@@ -3,7 +3,19 @@
 
 const FindAll=()=>{
     return new Promise((resolve, reject)=>{
-        pool.query("SELECT * FROM reflections")
+        pool.query("SELECT * FROM reflections ORDER BY id asc")
+            .then((result)=>{
+                resolve(result)
+            })
+            .catch((err)=>{
+                reject(err)
+            })
+    })
+}
+
+const FindOne=(id)=>{
+    return new Promise((resolve, reject)=>{
+        pool.query("SELECT * FROM reflections WHERE id=$1",[id])
             .then((result)=>{
                 resolve(result)
             })
@@ -15,7 +27,7 @@ const FindAll=()=>{
 
 const FindAllReflectionsUser=(id)=>{
     return new Promise((resolve,reject)=>{
-        pool.query("SELECT reflections.id,reflections.success,reflections.low_point,reflections.take_away,reflections.owner_id,reflections.created_date,reflections.modified_date,users.username,users.email FROM reflections INNER JOIN users ON reflections.owner_id=users.id WHERE owner_id=$1",[id])
+        pool.query("SELECT reflections.id,reflections.success,reflections.low_point,reflections.take_away,reflections.owner_id,reflections.created_date,reflections.modified_date,users.username,users.email FROM reflections INNER JOIN users ON reflections.owner_id=users.id WHERE owner_id=$1 ORDER BY id ASC",[id])
             .then((result)=>{
                 resolve(result)
             })
@@ -25,7 +37,7 @@ const FindAllReflectionsUser=(id)=>{
     })
 }
 
-const CreateReflection=(id,success,low_point,take_away,owner_id,created_date,modified_date)=>{
+const CreateReflection=(id,success,low_point,take_away,owner_id)=>{
     let now = new Date();
     const query="INSERT INTO reflections (id,success,low_point,take_away,owner_id,created_date,modified_date) values ($1,$2,$3,$4,$5,$6,$7) returning * "
     return new Promise((resolve,reject)=>{
@@ -71,6 +83,7 @@ const del = (id) => {
 module.exports={
     CreateReflection,
     FindAllReflectionsUser,
+    FindOne,
     FindAll,
     update,
     del
