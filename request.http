@@ -14,7 +14,7 @@ POST {{host}}/users/login
 Content-Type: application/json
 
 {
-  "email": "diory2@gmail.com",
+  "email": "diory1@gmail.com",
   "password": "12345"
 }
 
@@ -34,7 +34,7 @@ Content-Type: application/json
 }
 
 ###
-PUT {{host}}/reflections/6
+PUT {{host}}/reflections/12
 Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
