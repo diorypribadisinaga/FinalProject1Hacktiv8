@@ -54,7 +54,7 @@ const update = async (req, res) => {
 const del = async (req, res) => {
     try {
         const { id } = req.params
-        const owner_id =req.user
+        const owner_id =req.user.id
         const { rows } = await Reflection.FindOne(id)
         if (rows.length === 0) return res.json({ message: "Data Tidak Ditemukan" })
         if (rows[0].owner_id !== owner_id) {
@@ -62,7 +62,7 @@ const del = async (req, res) => {
             return
         }
         const result=await Reflection.del(id)
-        res.status(200).json(result.rows)
+        res.status(200).json({message: 'Data berhasil dihapus', data: result.rows})
     } catch (error) {
         res.status(500).json(error)
     }
