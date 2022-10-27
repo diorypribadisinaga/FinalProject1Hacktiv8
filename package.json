@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon bin/index.js",
+    "start": "node bin/index.js",
+    "dev": "nodemon bin/index.js",
     "db:create": "node db/createDatabase.js",
     "db:migrate": "node db/migrations/createTable.js",
     "db:drop": "node db/dropDatabase.js",

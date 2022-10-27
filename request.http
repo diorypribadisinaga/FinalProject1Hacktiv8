@@ -4,8 +4,8 @@ POST {{host}}/users/register
 Content-Type: application/json
 
 {
-  "email": "diory4@gmail.com",
-  "username": "diory2",
+  "email": "diory3@gmail.com",
+  "username": "diory3",
   "password": "Diory123?"
 }
 
@@ -14,36 +14,34 @@ POST {{host}}/users/login
 Content-Type: application/json
 
 {
-  "email": "diory1@gmail.com",
-  "password": "12345"
+  "email": "diory3@gmail.com",
+  "password": "Diory123?"
 }
 
 ###
 GET {{host}}/reflections
-Authorization: Bearer {{accessToken}}
+Authorization: Bearer {{token}}
 
 ###
 POST {{host}}/reflections
-Authorization: Bearer {{accessToken}}
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "success":"today success",
+  "success":"today success 2",
   "low_point":"new low point user 3",
   "take_away":"new Take Away user 3"
 }
 
 ###
-PUT {{host}}/reflections/12
-Authorization: Bearer {{accessToken}}
+PUT {{host}}/reflections/5
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "success":"today Not success",
-  "low_point":"new low point new user 3",
-  "take_away":"new Take Away new user 3"
+  "success": "today success"
 }
 
 ###
-DELETE {{host}}/reflections/6
-Authorization: Bearer {{accessToken}}
+DELETE {{host}}/reflections/5
+Authorization: Bearer {{token}}
