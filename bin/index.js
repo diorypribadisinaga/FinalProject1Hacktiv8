@@ -1,5 +1,5 @@
 const app=require("../app")
-PORT=8000||process.env.PORT
+PORT=process.env.PORT||8000
 
 app.listen(PORT,()=>{
     console.log(`Server Sudah Berjalan di http://localhost:${PORT}`)
